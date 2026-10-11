@@ -1,3 +1,6 @@
+# SkillBridge
+Peer-to-Peer Skill Exchange and Micro-Mentoring Platform
+
 # SkillBridge — Peer-to-Peer Skill Exchange & Micro-Mentoring Platform
 
 SkillBridge is an end-to-end web platform designed to connect students who want to learn a skill with students who can teach that skill through focused micro-mentoring sessions. 
