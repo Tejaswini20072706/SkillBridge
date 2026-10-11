@@ -1,0 +1,201 @@
+{
+  "info": {
+    "_postman_id": "c1f7a0b3-90d1-4e78-9e5b-118837267123",
+    "name": "SkillBridge — REST API Collection",
+    "description": "Complete Postman collection for SkillBridge Peer-to-Peer Micro-Mentoring Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "1. Register Student",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Neha Gupta\",\n  \"email\": \"neha@example.com\",\n  \"password\": \"password123\",\n  \"college\": \"National Institute of Technology\",\n  \"department\": \"Computer Science\",\n  \"academicYear\": \"3rd Year\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "2. Login Student",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aarav@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skills & Mentors Discovery",
+      "item": [
+        {
+          "name": "1. Get All Skills",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:8080/api/skills", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "skills"] }
+          }
+        },
+        {
+          "name": "2. Propose New Skill",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skillName\": \"Kubernetes & Container Orchestration\",\n  \"category\": \"DevOps & Cloud\",\n  \"description\": \"Pods, deployments, services and helm charts\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/skills", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "skills"] }
+          }
+        },
+        {
+          "name": "3. Search Mentors",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:8080/api/skills/mentors?query=Java&category=Software Engineering&proficiency=ADVANCED", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "skills", "mentors"], "query": [{ "key": "query", "value": "Java" }, { "key": "category", "value": "Software Engineering" }, { "key": "proficiency", "value": "ADVANCED" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mentoring Requests",
+      "item": [
+        {
+          "name": "1. Send Mentoring Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mentorId\": 2,\n  \"skillId\": 4,\n  \"preferredDateTime\": \"Thursday 4:00 PM\",\n  \"message\": \"Hi Priya, looking to learn Figma auto-layout and components!\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/requests", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "requests"] }
+          }
+        },
+        {
+          "name": "2. Get My Requests",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/requests/my", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "requests", "my"] }
+          }
+        },
+        {
+          "name": "3. Accept Request",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/requests/1/accept", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "requests", "1", "accept"] }
+          }
+        },
+        {
+          "name": "4. Reject Request",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/requests/1/reject", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "requests", "1", "reject"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sessions Management",
+      "item": [
+        {
+          "name": "1. Schedule Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": 1,\n  \"scheduledAt\": \"Oct 15, 2026 at 4:00 PM\",\n  \"duration\": 60,\n  \"mode\": \"ONLINE\",\n  \"meetingLinkOrLocation\": \"https://meet.google.com/sb-micro-mentoring\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/sessions", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "sessions"] }
+          }
+        },
+        {
+          "name": "2. Get My Sessions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/sessions/my", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "sessions", "my"] }
+          }
+        },
+        {
+          "name": "3. Mark Session Completed",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/sessions/1/complete", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "sessions", "1", "complete"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Feedback & Ratings",
+      "item": [
+        {
+          "name": "1. Submit Feedback",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": 1,\n  \"targetUserId\": 2,\n  \"rating\": 5,\n  \"comment\": \"Exceptional mentoring! Explained Figma components clearly in under 45 minutes.\"\n}"
+            },
+            "url": { "raw": "http://localhost:8080/api/feedback", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "feedback"] }
+          }
+        },
+        {
+          "name": "2. Get User Feedback",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:8080/api/feedback/user/2", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "feedback", "user", "2"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "1. Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/notifications", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "notifications"] }
+          }
+        },
+        {
+          "name": "2. Mark As Read",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:8080/api/notifications/1/read", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "notifications", "1", "read"] }
+          }
+        }
+      ]
+    }
+  ]
+}
