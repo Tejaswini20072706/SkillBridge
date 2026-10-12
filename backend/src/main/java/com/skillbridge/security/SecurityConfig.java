@@ -43,17 +43,21 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/error",
-                                "/api/skills",
-                                "/api/skills/**",
-                                "/api/users/*/public"
-                        ).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                
+.authorizeHttpRequests(auth -> auth
+        .requestMatchers(
+                "/api/auth/**",
+                "/error",
+                "/api/skills",
+                "/api/skills/**",
+                "/api/users/*/public"
+        ).permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/feedback/**").permitAll()
+        .anyRequest().authenticated()
+)
+
+                
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
