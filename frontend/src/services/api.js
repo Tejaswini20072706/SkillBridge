@@ -1,5 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
-
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://skillbridge-backend-7iyb.onrender.com/api';
 export const authStorage = {
   getToken: () => localStorage.getItem('sb_token'),
   getUser: () => {
